@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './custom.css'
 
 const App = () => {
   const URL = 'http://localhost:3000/'
@@ -10,7 +11,7 @@ const App = () => {
   useEffect(() => {
     getResult();
   }, [])
-  
+
   const getResult = async () => {
     const uid = window.location.search.replace('?list_id=', '')
     const result = await fetch(`${URL}?list_id=${uid}`)
@@ -54,26 +55,29 @@ const App = () => {
 
   const renderNames = () => {
     return names.map(name => {
-      return (<li key={name.id}>{name.name}</li>)
+      return (<li className="list-group-item" key={name.id}>{name.name}</li>)
     })
   }
 
   return (
-    <div className='container-fluid'>
+    <div className='container'>
       <div className='row justify-content-center'>
         <h5>Your List ID is: <strong>{curId}</strong></h5>
+        <hr />
         <form onSubmit={onSubmit}>
-          <input
-            type='text'
-            name='name'
-            placeholder='Add a name'
-            value={queryTerm}
-            onChange={(e) => setQueryTerm(e.target.value)}
-          ></input>
-          <button className='primary'>Submit</button>
+          <div className="form-group">
+            <input
+              type='text'
+              name='name'
+              placeholder='Add a name'
+              value={queryTerm}
+              onChange={(e) => setQueryTerm(e.target.value)}
+            ></input>
+            <button className='primary'>Submit</button>
+          </div>
         </form>
         <h1>Baby Names</h1>
-        <ul>
+        <ul className="list-group">
           {names ? renderNames() : null}
         </ul>
       </div>
