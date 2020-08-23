@@ -6,6 +6,7 @@ const App = () => {
   const [names, setNames] = useState([])
   const [curId, setCurId] = useState('')
   const [queryTerm, setQueryTerm] = useState('')
+  const [error, setError] = useState('')
 
 
   useEffect(() => {
@@ -13,10 +14,11 @@ const App = () => {
   }, [])
 
   const getResult = async () => {
+    setError('');
     const uid = window.location.search.replace('?list_id=', '')
     const result = await fetch(`${URL}?list_id=${uid}`)
     let response = await result.json()
-    console.log(response)
+    // console.log(response)
     if (response.error) {
       setCurId(response.error)
     }
@@ -42,13 +44,20 @@ const App = () => {
     })
     const response = await result.json()
     console.log(response)
-    getResult();
+    if(response.error){
+      setError(response.error)
+    }
+    else{
+      getResult();
+    }
   }
 
   const onSubmit = (e) => {
-    e.preventDefault()
-    console.log(queryTerm)
-    addName(queryTerm);
+    e.preventDefault();
+    let name = queryTerm.trim();
+    name = name.slice(0,1).toUpperCase() + name.slice(1).toLowerCase()
+    console.log('Name', name)
+    addName(name);
     setQueryTerm('');
   }
 
@@ -80,6 +89,9 @@ const App = () => {
         <ul className="list-group">
           {names ? renderNames() : null}
         </ul>
+        {error ?
+        <div className="alert alert-danger" role="alert"> Name already exists! </div>
+        : null}
       </div>
     </div>
   )
