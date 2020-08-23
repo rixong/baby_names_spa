@@ -54,9 +54,14 @@ const App = () => {
 
   const onSubmitName = (e) => {
     e.preventDefault();
-    let name = queryTerm.trim().split(' ');
+    let name = queryTerm.trim();
+    if(name.match(/[^A-z, a-z]/)){
+      setError('Name should only include letters.')
+      return
+    }
+    name = queryTerm.split(' ');
     if(name.length > 2){
-      setError('Name can only include one space.')
+      setError('Name should only include maximum one space.')
       return
     }
     //Fix capitalization
