@@ -37,7 +37,7 @@ const App = () => {
       body:
         JSON.stringify({
           uid: curId,
-          name: name
+          name: name.trim()
         })
     })
     const response = await result.json()
