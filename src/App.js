@@ -18,9 +18,9 @@ const App = () => {
     const uid = window.location.search.replace('?list_id=', '')
     const result = await fetch(`${URL}?list_id=${uid}`)
     let response = await result.json()
-    // console.log(response)
+    console.log(response)
     if (response.error) {
-      setCurId(response.error)
+      setError(response.error)
     }
     else {
       setNames(response.names)
@@ -39,24 +39,31 @@ const App = () => {
       body:
         JSON.stringify({
           uid: curId,
-          name: name.trim()
+          name: name
         })
     })
     const response = await result.json()
     console.log(response)
-    if(response.error){
+    if (response.error) {
       setError(response.error)
     }
-    else{
+    else {
       getResult();
     }
   }
 
-  const onSubmit = (e) => {
+  const onSubmitName = (e) => {
     e.preventDefault();
-    let name = queryTerm.trim();
-    name = name.slice(0,1).toUpperCase() + name.slice(1).toLowerCase()
-    console.log('Name', name)
+    let name = queryTerm.trim().split(' ');
+    if(name.length > 2){
+      setError('Name can only include one space.')
+      return
+    }
+    //Fix capitalization
+    name = name.map(subname => {
+      return (subname.slice(0, 1).toUpperCase() + subname.slice(1).toLowerCase())
+    }).join(' ');
+    // console.log('Name', name)
     addName(name);
     setQueryTerm('');
   }
@@ -71,9 +78,12 @@ const App = () => {
   return (
     <div className='container'>
       <div className='row justify-content-center'>
+        {error ?
+          <div className="alert alert-danger" role="alert"> {error}</div>
+          : null}
         <h5>Your List ID is: <strong>{curId}</strong></h5>
         <hr />
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmitName}>
           <div className="form-group">
             <input
               type='text'
@@ -85,13 +95,10 @@ const App = () => {
             <button className='primary'>Submit</button>
           </div>
         </form>
-        <h1>Baby Names</h1>
+        <h2>Name List</h2>
         <ul className="list-group">
           {names ? renderNames() : null}
         </ul>
-        {error ?
-        <div className="alert alert-danger" role="alert"> Name already exists! </div>
-        : null}
       </div>
     </div>
   )
