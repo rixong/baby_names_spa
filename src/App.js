@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import { useLocation, useParams } from 'react-router-dom'
 
 const App = () => {
   const URL = 'http://localhost:3000/'
@@ -11,7 +10,7 @@ const App = () => {
   useEffect(() => {
     getResult();
   }, [])
-
+  
   const getResult = async () => {
     const uid = window.location.search.replace('?list_id=', '')
     const result = await fetch(`${URL}?list_id=${uid}`)
@@ -23,6 +22,7 @@ const App = () => {
     else {
       setNames(response.names)
       setCurId(response.uid)
+      window.history.pushState("object or string", "Title", `/?list_id=${response.uid}`);
     }
   }
 
@@ -48,6 +48,7 @@ const App = () => {
     e.preventDefault()
     console.log(queryTerm)
     addName(queryTerm);
+    setQueryTerm('');
   }
 
 
