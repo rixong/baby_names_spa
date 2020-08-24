@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './custom.css'
 
 const App = () => {
-  const URL = 'http://localhost:3000/'
+  // const URL = 'http://localhost:3000/'
+  const URL = 'https://rixong-baby-spa.herokuapp.com/'
   const [names, setNames] = useState([])
   const [curId, setCurId] = useState('')
   const [queryTerm, setQueryTerm] = useState('')
