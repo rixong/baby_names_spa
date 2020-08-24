@@ -18,7 +18,7 @@ const App = () => {
     const uid = window.location.search.replace('?list_id=', '')
     const result = await fetch(`${URL}?list_id=${uid}`)
     let response = await result.json()
-    console.log(response)
+    // console.log(response)
     if (response.error) {
       setError(response.error)
     }
@@ -52,6 +52,29 @@ const App = () => {
     }
   }
 
+  const onClickName = async (e) => {
+    const name_id = parseInt(e.target.dataset.id)
+    const result = await fetch(`${URL}`, {
+      method: 'PATCH',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body:
+        JSON.stringify({
+          uid: curId,
+          name_id
+        })
+    })
+    let response = await result.json();
+    if(!response.error){
+      let tempNames = [...names]
+      let curName = tempNames.find(name => name.id === name_id);
+      curName.active = !curName.active
+      setNames(tempNames)
+    }
+  }
+
   const onSubmitName = (e) => {
     e.preventDefault();
     let name = queryTerm.trim();
@@ -76,7 +99,13 @@ const App = () => {
 
   const renderNames = () => {
     return names.map(name => {
-      return (<li className="list-group-item" key={name.id}>{name.name}</li>)
+      const textType = name.active ? "list-group-item" : "list-group-item strike"
+      return (<li 
+        className={textType}
+        key={name.id}
+        onClick={(e) => onClickName(e)}
+        data-id={name.id}
+        >{name.name}</li>)
     })
   }
 
