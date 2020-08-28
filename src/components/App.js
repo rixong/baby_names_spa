@@ -24,7 +24,7 @@ const App = () => {
       setError(result.error)
     }
     else {
-      console.log(result.curList)
+      // console.log(result.curList)
       setCurList(result.curList)
       window.history.pushState("object or string", "Title", `/?list_id=${result.curList.uid}`);
     }
@@ -37,7 +37,7 @@ const App = () => {
       <h5>Your unique URL is: <span style={{ color: 'red' }}>{URL}{curList.uid}</span></h5>
       <hr />
       <h2>Name List</h2>
-      {curList ? <NameList listId={curList.id} /> : null}
+      {curList ? <NameList listId={curList.id} setError={setError}/> : null}
     </div>
   )
 }
