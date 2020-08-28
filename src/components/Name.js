@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const Name = ({name}) => {
+const Name = ({name, handleStatusClick}) => {
 
   const textType = name.active ? "list-group-item" : "list-group-item strike"
 
@@ -9,7 +9,7 @@ const Name = ({name}) => {
     <div 
     data-id={name.id}
     className={textType}
-
+    onClick={() => handleStatusClick(name.id)}
     >
       {name.name}
     </div>

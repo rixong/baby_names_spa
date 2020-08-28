@@ -19,28 +19,29 @@ const NameList = ({ listId }) => {
     setNames(result.names)
   }
 
-  // const onClickName = async () => {
-  //   const name_id = parseInt(e.target.dataset.id)
-  //   const result = await fetch(`${URL}`, {
-  //     method: 'PATCH',
-  //     headers: {
-  //       'Accept': 'application/json',
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body:
-  //       JSON.stringify({
-  //         uid: curId,
-  //         name_id
-  //       })
-  //   })
-  //   let response = await result.json();
-  //   if (!response.error) {
-  //     let tempNames = [...names]
-  //     let curName = tempNames.find(name => name.id === name_id);
-  //     curName.active = !curName.active
-  //     setNames(tempNames)
-  //   }
-  // }
+  const handleStatusClick = async (nameId) => {
+    // const name_id = parseInt(e.target.dataset.id)
+    console.log('Clicked')
+    const result = await fetch(`${URL}`, {
+      method: 'PATCH',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body:
+        JSON.stringify({
+          id: listId,
+          name_id: nameId
+        })
+    })
+    let response = await result.json();
+    if (!response.error) {
+      let tempNames = [...names]
+      let curName = tempNames.find(name => name.id === nameId);
+      curName.active = !curName.active
+      setNames(tempNames)
+    }
+  }
 
   // const addName = async (name) => {
   //   const response = await fetch(`${URL}`, {
@@ -90,7 +91,7 @@ const NameList = ({ listId }) => {
     return names.map(name => {
       // const textType = name.active ? "list-group-item" : "list-group-item strike"
       return (<Name 
-        // onClick={(e) => onClickName(e)} 
+        handleStatusClick={handleStatusClick} 
         key={`${name.list_id}-${name.id}`}
         name={name}/>)
     })
