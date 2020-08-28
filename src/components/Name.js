@@ -1,10 +1,17 @@
 import React from 'react';
 
 
-const Name = () => {
+const Name = ({name}) => {
+
+  const textType = name.active ? "list-group-item" : "list-group-item strike"
+
   return (
-    <div>
-      From Name
+    <div 
+    data-id={name.id}
+    className={textType}
+
+    >
+      {name.name}
     </div>
   )
 }
