@@ -1,12 +1,11 @@
 body {
   padding-top: 40px;
-  background-color:whitesmoke;
+  background-color:rgb(206, 206, 206);
   text-align: center;
 }
 
 .row{
-  margin-left: 40%;
-  width: 40%;
+  width: 60%;
 } 
 
 .list-group-item{
