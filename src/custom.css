@@ -1,12 +1,15 @@
 body {
-  padding-top: 40px;
   background-color:rgb(206, 206, 206);
   text-align: center;
 }
 
-.row{
-  width: 60%;
-} 
+.container {
+  background-color: rgba(228, 154, 129, 0.995);
+}
+
+h1 {
+  color:rgb(13, 140, 162)
+}
 
 .list-group-item{
   text-align: left;
@@ -15,4 +18,9 @@ body {
 
 .strike {
   text-decoration:line-through ;
+}
+
+code {
+  font-size:1.5em;
+  color:rgb(254, 242, 219)
 }

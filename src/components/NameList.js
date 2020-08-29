@@ -34,7 +34,7 @@ const NameList = ({ listId, setError }) => {
     }
   }
 
-  const getNames = async() => {
+  const getNames = async () => {
     const response = await fetch(`${URL}/names/?list_id=${listId}`)
     const result = await response.json();
     // console.log('Names',result.names)
@@ -81,17 +81,17 @@ const NameList = ({ listId, setError }) => {
     name = name.map(subname => {
       return (subname.slice(0, 1).toUpperCase() + subname.slice(1).toLowerCase())
     }).join(' ');
-    console.log('Name', name)
+    // console.log('Name', name)
     addName(name);
     setQueryTerm('');
   }
 
   const renderNames = () => {
     return names.map(name => {
-      return (<Name 
-        handleStatusClick={handleStatusClick} 
+      return (<Name
+        handleStatusClick={handleStatusClick}
         key={`${name.list_id}-${name.id}`}
-        name={name}/>)
+        name={name} />)
     })
   }
 
@@ -99,17 +99,45 @@ const NameList = ({ listId, setError }) => {
     <div>
       <form onSubmit={onSubmitName}>
         <div className="form-group">
-          <input
-            type='text'
-            name='name'
-            placeholder='Add a name'
-            value={queryTerm}
-            onChange={(e) => setQueryTerm(e.target.value)}
-          ></input>
-          <button className='primary'>Submit</button>
+          <div className='input-group w-5'>
+            <div className='input-group-prepend'>
+              <span className="input-group-text">Name</span>
+            </div>
+            <input
+              type='text'
+              className='form-control'
+              value={queryTerm}
+              onChange={(e) => setQueryTerm(e.target.value)}
+            ></input>
+            <div class="input-group-append">
+              <button
+                className='btn btn-secondary'
+                type='button'
+              >Submit</button>
+              <button
+                type="button"
+                class="btn btn-secondary dropdown-toggle dropdown-toggle-split"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              ><span class="sr-only">Sort order</span></button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">A-Z</a>
+                <a class="dropdown-item" href="#">Z-A</a>
+                <div role="separator" class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Newest</a>
+                <a class="dropdown-item" href="#">Oldest</a>
+                <div role="separator" class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Shortest</a>
+                <a class="dropdown-item" href="#">Longest</a>
+              </div>
+            </div>
+          </div>
         </div>
       </form>
-      {renderNames()}
+      <div>
+        {renderNames()}
+      </div>
     </div>
   )
 }
