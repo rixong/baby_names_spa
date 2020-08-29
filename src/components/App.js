@@ -20,13 +20,13 @@ const App = () => {
     const uid = window.location.search.replace('?list_id=', '')  /// THESE CAN BE COMBINED
     const response = await fetch(`${URL}?list_id=${uid}`)
     let result = await response.json()
+    console.log('result', result.list)
     if (result.error) {
       setError(result.error)
     }
     else {
-      // console.log(result.curList)
-      setCurList(result.curList)
-      window.history.pushState("object or string", "Title", `/?list_id=${result.curList.uid}`);
+      setCurList(result.list)
+      window.history.pushState("object or string", "Title", `/?list_id=${result.list.uid}`);
     }
   }
 
@@ -34,7 +34,11 @@ const App = () => {
     <div className='container'>
       <h1>Baby Names</h1>
       <div className='row'><Alert error={error}/></div>
-      <h5>Your unique URL is: <span style={{ color: 'red' }}>{URL}{curList.uid}</span></h5>
+      <h5>Your unique URL is: 
+        { curList.uid ?
+        <span style={{ color: 'red' }}>{URL}{curList.uid}</span>
+        : null}
+        </h5>
       <hr />
       <h2>Name List</h2>
       {curList ? <NameList listId={curList.id} setError={setError}/> : null}

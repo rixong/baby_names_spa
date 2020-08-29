@@ -60,6 +60,7 @@ const NameList = ({ listId, setError }) => {
       setError(result.error)
     }
     else {
+      getNames();
       setError('Done!')
     }
   }
