@@ -53,6 +53,12 @@ const Form = ({ listId, getNames, sortNames, setError }) => {
     sortNames(e.target.value)
   }
 
+  const onHandleFocus = () => {
+    // console.log('focus!')
+    setError('')
+    // document.querySelector('.name-input').value = ''
+  }
+
 
 
   return (
@@ -61,13 +67,15 @@ const Form = ({ listId, getNames, sortNames, setError }) => {
         <div className="form-group">
           <div className='input-group w-5'>
             <div className='input-group-prepend'>
-              <span className="input-group-text">Name</span>
+              <span className="input-group-text bg-info text-dark name-input">Name</span>
             </div>
             <input
               type='text'
               className='form-control'
+              placeholder='type here'
               value={queryTerm}
               onChange={(e) => setQueryTerm(e.target.value)}
+              onFocus={onHandleFocus}
             ></input>
             <div className="input-group-append">
               <button

@@ -1,15 +1,16 @@
 body {
   background-color:rgb(206, 206, 206);
+  background-image: linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, .8)), url('/baby2.jpg');
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
   text-align: center;
+  height:100%;
 }
 
-.container {
+/* .container {
   background-color: rgba(228, 154, 129, 0.995);
-}
-
-h1 {
-  color:rgb(13, 140, 162)
-}
+} */
 
 .name-list {
   display:flex;
@@ -19,7 +20,7 @@ h1 {
 .list-group-item{
   text-align: center;
   font-size: 28px;
-  background-color: rgb(182, 182, 67);
+  /* background-color: rgb(182, 182, 67); */
   display: inline;
   margin:5px;
   padding:10 22px;
@@ -29,10 +30,10 @@ h1 {
 
 .strike {
   text-decoration:line-through;
-  color:rgb(171, 171, 171);
+  /* color:rgb(105, 105, 105); */
 }
 
 code {
   font-size:1.5em;
-  color:rgb(254, 242, 219)
+  color:rgb(147, 147, 147)
 }

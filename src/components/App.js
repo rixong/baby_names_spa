@@ -44,19 +44,20 @@ const App = () => {
 
   return (
     <div className='container p-5 rounded'>
-      <h1 className='display-1'>Baby Names</h1>
+      <h1 className='display-1 text-primary'>Baby Names</h1>
       <div className='row d-inline'>
-        <h5>Your unique URL:</h5>
+        <h5 className='text-primary'>Your unique URL:</h5>
         {curList.uid ?
-          <code className='mx-3' id='uniqueUrl'>{clientURL}{`/?list_id=${curList.uid}`}</code>
+          <h4 className='mt-3 text-info' id='uniqueUrl'>{clientURL}{`/?list_id=${curList.uid}`}
+            <button className='btn btn-secondary text-dark ml-4' onClick={copyUrl}>Copy</button>
+          </h4>
           : null}
-        <button className='button primary' id='copy-button' onClick={copyUrl}>Copy</button>
       </div>
+      <h1 className='text-primary'>&mdash;&mdash;&mdash;&mdash;</h1>
       <Alert error={error} />
-      <h1>&mdash;&mdash;&mdash;&mdash;</h1>
-      {curList ? 
-      <NameList listId={curList.id} setError={setError} /> 
-      : null}
+      {curList ?
+        <NameList listId={curList.id} setError={setError} />
+        : null}
     </div>
   )
 
