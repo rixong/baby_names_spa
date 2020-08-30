@@ -11,9 +11,20 @@ h1 {
   color:rgb(13, 140, 162)
 }
 
+.name-list {
+  display:flex;
+  flex-wrap: wrap;
+}
+
 .list-group-item{
-  text-align: left;
-  font-size: 22px;
+  text-align: center;
+  font-size: 28px;
+  background-color: rgb(182, 182, 67);
+  display: inline;
+  margin:5px;
+  padding:10 22px;
+  /* border: solid 1px; */
+  /* border-radius: 40%; */
 }
 
 .strike {

@@ -28,9 +28,8 @@ const NameList = ({ listId, setError }) => {
   }
 
   const sortNames = (sortType) => {
-    console.log('Sort', sortType)
+    // console.log('Sort', sortType)
     const sorted = names.slice().sort(sorts[sortType])
-    console.log(sorted)
     setSortedNames(sorted)
   }
 
@@ -73,7 +72,7 @@ const NameList = ({ listId, setError }) => {
         setError={setError}
         sortNames={sortNames}
       />
-      <div>
+      <div className='name-list'>
         {renderNames()}
       </div>
     </div>

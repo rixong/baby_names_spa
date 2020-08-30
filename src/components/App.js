@@ -26,7 +26,7 @@ const App = () => {
     }
     else {
       setCurList(result.list)
-      console.log(result.list.uid)
+      // console.log(result.list.uid)
       window.history.pushState("object or string", "Title", `/?list_id=${result.list.uid}`);
     }
   }
@@ -48,7 +48,7 @@ const App = () => {
       <div className='row d-inline'>
         <h5>Your unique URL:</h5>
         {curList.uid ?
-          <code className='mx-3' id='uniqueUrl'>{clientURL}{window.location.search}</code>
+          <code className='mx-3' id='uniqueUrl'>{clientURL}{`/?list_id=${curList.uid}`}</code>
           : null}
         <button className='button primary' id='copy-button' onClick={copyUrl}>Copy</button>
       </div>

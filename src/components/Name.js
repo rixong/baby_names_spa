@@ -2,7 +2,7 @@ import React from 'react';
 
 const Name = ({ name, handleStatusClick }) => {
 
-  const status = name.active ? "list-group-item" : "list-group-item strike"
+  const status = name.active ? "list-group-item rounded-circle" : "list-group-item rounded-circle strike"
 
   return (
     <div

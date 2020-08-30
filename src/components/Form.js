@@ -6,7 +6,6 @@ const Form = ({ listId, getNames, sortNames, setError }) => {
   const [queryTerm, setQueryTerm] = useState('')
   
   const addName = async (name) => {
-    
     const response = await fetch(`${URL}`, {
       method: 'POST',
       headers: {
@@ -57,7 +56,7 @@ const Form = ({ listId, getNames, sortNames, setError }) => {
 
 
   return (
-    <div>
+    <div className='mb-5'>
       <form onSubmit={onSubmitName}>
         <div className="form-group">
           <div className='input-group w-5'>
