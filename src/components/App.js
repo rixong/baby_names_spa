@@ -26,6 +26,7 @@ const App = () => {
     }
     else {
       setCurList(result.list)
+      console.log(result.list.uid)
       window.history.pushState("object or string", "Title", `/?list_id=${result.list.uid}`);
     }
   }
@@ -42,8 +43,8 @@ const App = () => {
   }
 
   return (
-    <div className='container px-5 rounded'>
-      <h1 className='display-1 pt-5'>Baby Names</h1>
+    <div className='container p-5 rounded'>
+      <h1 className='display-1'>Baby Names</h1>
       <div className='row d-inline'>
         <h5>Your unique URL:</h5>
         {curList.uid ?
@@ -52,8 +53,12 @@ const App = () => {
         <button className='button primary' id='copy-button' onClick={copyUrl}>Copy</button>
       </div>
       <Alert error={error} />
-      {curList ? <NameList listId={curList.id} setError={setError} /> : null}
+      <h1>&mdash;&mdash;&mdash;&mdash;</h1>
+      {curList ? 
+      <NameList listId={curList.id} setError={setError} /> 
+      : null}
     </div>
   )
+
 }
 export default App;

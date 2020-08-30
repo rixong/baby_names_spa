@@ -17,7 +17,8 @@ h1 {
 }
 
 .strike {
-  text-decoration:line-through ;
+  text-decoration:line-through;
+  color:rgb(171, 171, 171);
 }
 
 code {
