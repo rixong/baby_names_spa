@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../custom.css'
 import Alert from './Alert'
 import NameList from './NameList'
+// import ALertModal from './AlertModal'
 
 const App = () => {
   const URL = 'http://localhost:3000/'
@@ -44,17 +45,27 @@ const App = () => {
 
   return (
     <div className='container p-5 rounded'>
-      <h1 className='display-1 text-primary'>Baby Names</h1>
+
+      {/* <button type="button" data-toggle="modal" data-target="#exampleModal">Launch modal</button> */}
+
+      <div className='display-1 text-light '>Baby Names</div>
       <div className='row d-inline'>
-        <h5 className='text-primary'>Your unique URL:</h5>
+        <h4 className='text-light font-weight-light'>Your unique URL:</h4>
         {curList.uid ?
-          <h4 className='mt-3 text-info' id='uniqueUrl'>{clientURL}{`/?list_id=${curList.uid}`}
-            <button className='btn btn-secondary text-dark ml-4' onClick={copyUrl}>Copy</button>
+          <h4 className='mt-3 text-info' id='uniqueUrl'>{clientURL}{`?list_id=${curList.uid}`}
+            <button 
+              className='btn btn-secondary text-dark ml-4'
+              id='copy-button'
+              onClick={copyUrl}
+            >Copy
+            </button>
           </h4>
           : null}
       </div>
+      <div className='alert-box'>
+        <Alert error={error} />
+      </div>
       <h1 className='text-primary'>&mdash;&mdash;&mdash;&mdash;</h1>
-      <Alert error={error} />
       {curList ?
         <NameList listId={curList.id} setError={setError} />
         : null}

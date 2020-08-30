@@ -30,10 +30,9 @@ body {
 
 .strike {
   text-decoration:line-through;
-  /* color:rgb(105, 105, 105); */
 }
 
-code {
-  font-size:1.5em;
-  color:rgb(147, 147, 147)
+.alert-box {
+  padding:0;
+  height:0px;
 }

@@ -24,7 +24,6 @@ const Form = ({ listId, getNames, sortNames, setError }) => {
     }
     else {
       getNames();
-      setError('Done!')
     }
   }
 

@@ -2,7 +2,7 @@ import React from 'react';
 
 const Name = ({ name, handleStatusClick }) => {
 
-  const divClassDefault = 'list-group-item rounded-circle'
+  const divClassDefault = 'list-group-item rounded'
   const divClassFinal = name.active ? 
     `${divClassDefault} bg-primary text-dark`
     : `${divClassDefault} bg-info strike`
