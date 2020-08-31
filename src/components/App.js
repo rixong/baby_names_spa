@@ -15,25 +15,26 @@ const App = () => {
   const [error, setError] = useState('')
 
   useEffect(() => {
-    getList();
-  }, [])
 
-  ///
-  const getList = async () => {
-    setError('');
-    const uid = window.location.search.replace('?list_id=', '')  /// THESE CAN BE COMBINED
-    const response = await fetch(`${URL}?list_id=${uid}`)
-    let result = await response.json()
-    // console.log('result', result.list)
-    if (result.error) {
-      setError(result.error)
+    const getList = async () => {
+      setError('');
+      const uid = window.location.search.replace('?list_id=', '')  /// THESE CAN BE COMBINED
+      const response = await fetch(`${URL}?list_id=${uid}`)
+      let result = await response.json()
+      // console.log('result', result.list)
+      if (result.error) {
+        setError(result.error)
+      }
+      else {
+        setCurList(result.list)
+        // console.log(result.list.uid)
+        window.history.pushState("object or string", "Title", `/?list_id=${result.list.uid}`);
+      }
     }
-    else {
-      setCurList(result.list)
-      // console.log(result.list.uid)
-      window.history.pushState("object or string", "Title", `/?list_id=${result.list.uid}`);
-    }
-  }
+
+    getList();
+  }, [URL])
+
 
   function copyUrl() {
     var elem = document.getElementById("uniqueUrl");
