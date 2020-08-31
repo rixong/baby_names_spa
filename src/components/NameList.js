@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Name from './Name';
 import Form from './Form';
-
+import {config} from '../const'
 
 const NameList = ({ listId, setError }) => {
-  const URL = 'http://localhost:3000/'
-
+  // const URL = 'http://localhost:3000/'
+  // const URL = 'https://rixong-baby-spa.herokuapp.com/'
+  const URL = config.url.API_URL
+  
+  
   const [names, setNames] = useState([])
   const [sortedNames, setSortedNames] = useState([])
   const sorts = {
@@ -17,9 +20,11 @@ const NameList = ({ listId, setError }) => {
 
   useEffect(() => {
     getNames();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [listId])
 
   const getNames = async () => {
+    
     const response = await fetch(`${URL}/names/?list_id=${listId}`)
     const result = await response.json();
     // console.log('Names',result.names)

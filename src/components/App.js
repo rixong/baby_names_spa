@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react';
 import '../custom.css'
 import Alert from './Alert'
 import NameList from './NameList'
+import {config} from '../const'
 // import ALertModal from './AlertModal'
 
 const App = () => {
-  const URL = 'http://localhost:3000/'
+  // const URL = 'http://localhost:3000/'
   // const URL = 'https://rixong-baby-spa.herokuapp.com/'
+  const URL = config.url.API_URL
+
   const clientURL = 'http://localhost:3001/'
-  const [curList, setCurList] = useState('')
+  const [curList, setCurList] = useState([])
   const [error, setError] = useState('')
 
   useEffect(() => {
@@ -51,7 +54,7 @@ const App = () => {
       <div className='display-1 text-light '>Baby Names</div>
       <div className='row d-inline'>
         <h4 className='text-light font-weight-light'>Your unique URL:</h4>
-        {curList.uid ?
+        {curList ?
           <h4 className='mt-3 text-info' id='uniqueUrl'>{clientURL}{`?list_id=${curList.uid}`}
             <button 
               className='btn btn-secondary text-dark ml-4'
@@ -66,7 +69,7 @@ const App = () => {
         <Alert error={error} />
       </div>
       <h1 className='text-primary'>&mdash;&mdash;&mdash;&mdash;</h1>
-      {curList ?
+      {curList.id ?
         <NameList listId={curList.id} setError={setError} />
         : null}
     </div>

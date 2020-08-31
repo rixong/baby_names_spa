@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
+import {config} from '../const'
+
 
 const Form = ({ listId, getNames, sortNames, setError }) => {
   
-  const URL = 'http://localhost:3000/'
+  // const URL = 'http://localhost:3000/'
+  // const URL = 'https://rixong-baby-spa.herokuapp.com/'
+  const URL = config.url.API_URL
+
+
   const [queryTerm, setQueryTerm] = useState('')
   
   const addName = async (name) => {
