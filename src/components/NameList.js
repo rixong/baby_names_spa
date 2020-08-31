@@ -4,18 +4,19 @@ import Form from './Form';
 import {config} from '../const'
 
 const NameList = ({ listId, setError }) => {
-  // const URL = 'http://localhost:3000/'
-  // const URL = 'https://rixong-baby-spa.herokuapp.com/'
+
   const URL = config.url.API_URL
-  
   
   const [names, setNames] = useState([])
   const [sortedNames, setSortedNames] = useState([])
+  
   const sorts = {
     alpha: (a,b) => a.name.localeCompare(b.name),
     revAlpha: (a,b) => b.name.localeCompare(a.name),
     createdAt: (a,b) => a.created_at.localeCompare(b.created_at),
-    revCreatedAt: (a,b) => b.created_at.localeCompare(a.created_at)
+    revCreatedAt: (a,b) => b.created_at.localeCompare(a.created_at),
+    shortest: (a,b) => a.name.length - b.name.length,
+    longest: (a,b) => b.name.length - a.name.length
   }
 
   useEffect(() => {
@@ -24,7 +25,6 @@ const NameList = ({ listId, setError }) => {
   }, [listId])
 
   const getNames = async () => {
-    
     const response = await fetch(`${URL}/names/?list_id=${listId}`)
     const result = await response.json();
     // console.log('Names',result.names)
@@ -33,7 +33,6 @@ const NameList = ({ listId, setError }) => {
   }
 
   const sortNames = (sortType) => {
-    // console.log('Sort', sortType)
     const sorted = names.slice().sort(sorts[sortType])
     setSortedNames(sorted)
   }

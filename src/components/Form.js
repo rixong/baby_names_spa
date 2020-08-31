@@ -4,8 +4,6 @@ import {config} from '../const'
 
 const Form = ({ listId, getNames, sortNames, setError }) => {
   
-  // const URL = 'http://localhost:3000/'
-  // const URL = 'https://rixong-baby-spa.herokuapp.com/'
   const URL = config.url.API_URL
 
 
@@ -64,8 +62,6 @@ const Form = ({ listId, getNames, sortNames, setError }) => {
     // document.querySelector('.name-input').value = ''
   }
 
-
-
   return (
     <div className='mb-5'>
       <form onSubmit={onSubmitName}>
@@ -103,8 +99,8 @@ const Form = ({ listId, getNames, sortNames, setError }) => {
                 <button className="dropdown-item" type="button" value='createdAt' onClick={onSelectSort}>Newest</button>
                 <button className="dropdown-item" type="button" value='revCreatedAt' onClick={onSelectSort}>Oldest</button>
                 <div role="separator" className="dropdown-divider"></div>
-                <button className="dropdown-item" type="button" value='active' onClick={onSelectSort}>Active</button>
-                <button className="dropdown-item" type="button" value='inactive' onClick={onSelectSort}>Inactive</button>
+                <button className="dropdown-item" type="button" value='shortest' onClick={onSelectSort}>Shortest</button>
+                <button className="dropdown-item" type="button" value='longest' onClick={onSelectSort}>Longest</button>
               </div>
             </div>
           </div>

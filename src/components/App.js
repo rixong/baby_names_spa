@@ -20,8 +20,9 @@ const App = () => {
 
     const getList = async () => {
       setError('');
-      const uid = window.location.search.replace('?list_id=', '')  /// THESE CAN BE COMBINED
-      const response = await fetch(`${URL}?list_id=${uid}`)
+      const path = window.location.search /// THESE CAN BE COMBINED
+      console.log(window.location.search)
+      const response = await fetch(`${URL}${path}`)
       let result = await response.json()
       // console.log('result', result.list)
       if (result.error) {
@@ -29,7 +30,6 @@ const App = () => {
       }
       else {
         setCurList(result.list)
-        // console.log(result.list.uid)
         window.history.pushState("object or string", "Title", `/?list_id=${result.list.uid}`);
       }
     }
@@ -48,7 +48,6 @@ const App = () => {
     document.execCommand("Copy");
     selection.removeAllRanges();
     setCopied(true);
-    // document.getElementById('copy-button').innerHtml = '<CheckCircleIcon size={24} />'
   }
 
   return (
