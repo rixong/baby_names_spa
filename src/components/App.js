@@ -10,7 +10,7 @@ const App = () => {
   // const URL = 'https://rixong-baby-spa.herokuapp.com/'
   const URL = config.url.API_URL
 
-  const clientURL = 'http://localhost:3001/'
+  const clientURL = 'https://pensive-villani-db112d.netlify.app/'
   const [curList, setCurList] = useState([])
   const [error, setError] = useState('')
 
