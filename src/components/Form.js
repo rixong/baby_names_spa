@@ -73,7 +73,7 @@ const Form = ({ listId, getNames, sortNames, setError }) => {
             <input
               type='text'
               className='form-control'
-              placeholder='type here'
+              placeholder='Add names to your list here'
               value={queryTerm}
               onChange={(e) => setQueryTerm(e.target.value)}
               onFocus={onHandleFocus}
