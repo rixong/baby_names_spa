@@ -3,16 +3,18 @@ import '../custom.css'
 import Alert from './Alert'
 import NameList from './NameList'
 import {config} from '../const'
+import {CopyIcon, CheckCircleIcon} from '@primer/octicons-react';
+
 // import ALertModal from './AlertModal'
 
 const App = () => {
-  // const URL = 'http://localhost:3000/'
-  // const URL = 'https://rixong-baby-spa.herokuapp.com/'
-  const URL = config.url.API_URL
 
+  const URL = config.url.API_URL
   const clientURL = 'https://pensive-villani-db112d.netlify.app/'
+
   const [curList, setCurList] = useState([])
   const [error, setError] = useState('')
+  const [copied, setCopied] = useState(false)
 
   useEffect(() => {
 
@@ -44,7 +46,9 @@ const App = () => {
     selection.removeAllRanges();
     selection.addRange(range);
     document.execCommand("Copy");
-    document.getElementById('copy-button').textContent = 'Copied!'
+    selection.removeAllRanges();
+    setCopied(true);
+    // document.getElementById('copy-button').innerHtml = '<CheckCircleIcon size={24} />'
   }
 
   return (
@@ -54,16 +58,17 @@ const App = () => {
 
       <div className='display-1 text-light '>Baby Names</div>
       <div className='row d-inline'>
-        <h4 className='text-light font-weight-light'>Your unique URL:</h4>
+        <h4 className='text-light font-weight-light'>Your unique URL :</h4>
         {curList ?
-          <h4 className='mt-3 text-info' id='uniqueUrl'>{clientURL}{`?list_id=${curList.uid}`}
+          <h5 className='mt-3 text-info' id='uniqueUrl'>{clientURL}{`?list_id=${curList.uid}`}
             <button 
               className='btn btn-secondary text-dark ml-4'
               id='copy-button'
               onClick={copyUrl}
-            >Copy
+            >
+              {copied ? <CheckCircleIcon size={24}/> : <CopyIcon size={24}/>}
             </button>
-          </h4>
+          </h5>
           : null}
       </div>
       <div className='alert-box'>
