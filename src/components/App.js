@@ -21,7 +21,7 @@ const App = () => {
     const getList = async () => {
       setError('');
       const path = window.location.search /// THESE CAN BE COMBINED
-      console.log(window.location.search)
+      // console.log(window.location.search)
       const response = await fetch(`${URL}${path}`)
       let result = await response.json()
       // console.log('result', result.list)
