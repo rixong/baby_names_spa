@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import '../custom.css'
-import Alert from './Alert'
-import NameList from './NameList'
-import {config} from '../const'
+import '../custom.css';
+import Alert from './Alert';
+import NameList from './NameList';
+import Spinner from './SpinnerBox';
+import {config} from '../const';
 import {CopyIcon, CheckCircleIcon} from '@primer/octicons-react';
 
 // import ALertModal from './AlertModal'
@@ -12,7 +13,7 @@ const App = () => {
   const URL = config.url.API_URL
   const clientURL = 'https://pensive-villani-db112d.netlify.app/'
 
-  const [curList, setCurList] = useState([])
+  const [curList, setCurList] = useState(undefined)
   const [error, setError] = useState('')
   const [copied, setCopied] = useState(false)
 
@@ -20,8 +21,7 @@ const App = () => {
 
     const getList = async () => {
       setError('');
-      const path = window.location.search /// THESE CAN BE COMBINED
-      // console.log(window.location.search)
+      const path = window.location.search
       const response = await fetch(`${URL}${path}`)
       let result = await response.json()
       // console.log('result', result.list)
@@ -74,9 +74,9 @@ const App = () => {
         <Alert error={error} />
       </div>
       <h1 className='text-primary'>&mdash;&mdash;&mdash;&mdash;</h1>
-      {curList.id ?
+      {curList ?
         <NameList listId={curList.id} setError={setError} />
-        : null}
+        : <Spinner/>}
     </div>
   )
 
