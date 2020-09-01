@@ -6,8 +6,6 @@ import Spinner from './SpinnerBox';
 import {config} from '../const';
 import {CopyIcon, CheckCircleIcon} from '@primer/octicons-react';
 
-// import ALertModal from './AlertModal'
-
 const App = () => {
 
   const URL = config.url.API_URL
@@ -24,7 +22,6 @@ const App = () => {
       const path = window.location.search
       const response = await fetch(`${URL}${path}`)
       let result = await response.json()
-      // console.log('result', result.list)
       if (result.error) {
         setError(result.error)
       }
@@ -52,9 +49,6 @@ const App = () => {
 
   return (
     <div className='container p-5 rounded'>
-
-      {/* <button type="button" data-toggle="modal" data-target="#exampleModal">Launch modal</button> */}
-
       <div className='display-1 text-light '>Baby Names</div>
       <div className='row d-inline'>
         <h4 className='text-light font-weight-light'>Your unique URL :</h4>
