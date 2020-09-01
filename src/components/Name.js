@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Name = ({ name, handleStatusClick }) => {
+const Name = ({ name, handleStatusClick, handleDeleteClick }) => {
 
-  const divClassDefault = 'list-group-item rounded'
-  const divClassFinal = name.active ? 
+  const divClassDefault = 'list-group-item py-0 pr-1 mb-4 rounded'
+  const divClassFinal = name.active ?
     `${divClassDefault} bg-primary text-dark`
     : `${divClassDefault} bg-info strike`
 
@@ -15,6 +15,13 @@ const Name = ({ name, handleStatusClick }) => {
       onClick={() => handleStatusClick(name.id)}
     >
       {name.name}
+      <button 
+        type="button"
+        onClick={(e) => handleDeleteClick(e, name.id)}
+        className="close ml-3" 
+        aria-label="Close">
+        <span aria-hidden="true" className='h4' >&times;</span>
+      </button>
     </div>
   )
 }

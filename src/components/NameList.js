@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import Name from './Name';
 import Form from './Form';
-import {config} from '../const'
+import { config } from '../const'
 
 const NameList = ({ listId, setError }) => {
 
   const URL = config.url.API_URL
-  
+
   const [names, setNames] = useState([])
   const [sortedNames, setSortedNames] = useState([])
-  
+
   const sorts = {
-    alpha: (a,b) => a.name.localeCompare(b.name),
-    revAlpha: (a,b) => b.name.localeCompare(a.name),
-    createdAt: (a,b) => a.created_at.localeCompare(b.created_at),
-    revCreatedAt: (a,b) => b.created_at.localeCompare(a.created_at),
-    shortest: (a,b) => a.name.length - b.name.length,
-    longest: (a,b) => b.name.length - a.name.length
+    alpha: (a, b) => a.name.localeCompare(b.name),
+    revAlpha: (a, b) => b.name.localeCompare(a.name),
+    createdAt: (a, b) => a.created_at.localeCompare(b.created_at),
+    revCreatedAt: (a, b) => b.created_at.localeCompare(a.created_at),
+    shortest: (a, b) => a.name.length - b.name.length,
+    longest: (a, b) => b.name.length - a.name.length
   }
 
   useEffect(() => {
@@ -59,10 +59,33 @@ const NameList = ({ listId, setError }) => {
     }
   }
 
+  const handleDeleteClick = async (e, nameId) => {
+    e.stopPropagation()
+    console.log('Clicked: ', listId, nameId, e.target)
+    const response = await fetch(`${URL}/names`, {
+      method: "DELETE",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(
+        {
+          id: listId,
+          name_id: nameId
+        }
+      )
+    })
+    const result = await response.json();
+    console.log(result) 
+      getNames();
+
+  }
+
   const renderNames = () => {
     return sortedNames.map(name => {
       return (<Name
         handleStatusClick={handleStatusClick}
+        handleDeleteClick={handleDeleteClick}
         key={`${name.list_id}-${name.id}`}
         name={name} />)
     })
