@@ -12,8 +12,8 @@ const App = () => {
 
   const URL = config.url.API_URL
 
-// const clientURL = config.url.CLIENT_URL
-  const clientURL = 'https://pensive-villani-db112d.netlify.app/'
+const clientURL = config.url.CLIENT_URL
+  // const clientURL = 'https://pensive-villani-db112d.netlify.app/'
 
   const [curList, setCurList] = useState(undefined)
   const [error, setError] = useState('')
