@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react';
 import '../custom.css';
 import Alert from './Alert';
 import NameList from './NameList';
-import Spinner from './SpinnerBox';
+// import Spinner from './SpinnerBox';
 import {config} from '../const';
 import {CopyIcon, CheckCircleIcon} from '@primer/octicons-react';
 
 const App = () => {
 
   const URL = config.url.API_URL
-  const clientURL = config.url.CLIENT_URL
+  // const clientURL = config.url.CLIENT_URL
+  const clientURL = 'https://pensive-villani-db112d.netlify.app/'
 
   const [curList, setCurList] = useState(undefined)
   const [error, setError] = useState('')
@@ -70,7 +71,7 @@ const App = () => {
       <h1 className='text-primary'>&mdash;&mdash;&mdash;&mdash;</h1>
       {curList ?
         <NameList listId={curList.id} setError={setError} />
-        : <Spinner/>}
+        : null}
     </div>
   )
 
