@@ -9,10 +9,8 @@ import {CopyIcon, CheckCircleIcon} from '@primer/octicons-react';
 
 const App = () => {
 
-  const URL = config.url.API_URL
-
-const clientURL = config.url.CLIENT_URL
-  // const clientURL = 'https://pensive-villani-db112d.netlify.app/'
+  const URL = config.url.API_URL 
+  const clientURL = config.url.CLIENT_URL
 
   const [curList, setCurList] = useState(undefined)
   const [error, setError] = useState('')
