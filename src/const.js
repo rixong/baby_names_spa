@@ -1,8 +1,8 @@
 const prod = {
   url: {
     API_URL: 'https://rixong-baby-spa.herokuapp.com/',
-    // CLIENT_URL: 'https://pensive-villani-db112d.netlify.app/'
-    CLIENT_URL: 'https://pedantic-babbage-7ff9b3.netlify.app'
+    CLIENT_URL: 'https://pensive-villani-db112d.netlify.app/'
+    // CLIENT_URL: 'https://pedantic-babbage-7ff9b3.netlify.app'
   }
 };
 
