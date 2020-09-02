@@ -61,7 +61,7 @@ const NameList = ({ listId, setError }) => {
 
   const handleDeleteClick = async (e, nameId) => {
     e.stopPropagation()
-    console.log('Clicked: ', listId, nameId, e.target)
+    // console.log('Clicked: ', listId, nameId, e.target)
     const response = await fetch(`${URL}/names`, {
       method: "DELETE",
       headers: {

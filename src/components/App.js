@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../custom.css';
 import Alert from './Alert';
 import NameList from './NameList';
-
-// import Spinner from './SpinnerBox';
+import Spinner from './SpinnerBox';
 
 import {config} from '../const';
 import {CopyIcon, CheckCircleIcon} from '@primer/octicons-react';
@@ -74,7 +73,7 @@ const clientURL = config.url.CLIENT_URL
       <h1 className='text-primary'>&mdash;&mdash;&mdash;&mdash;</h1>
       {curList ?
         <NameList listId={curList.id} setError={setError} />
-        : null}
+        : <Spinner/>}
     </div>
   )
 

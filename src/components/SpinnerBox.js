@@ -2,9 +2,9 @@ import React from 'react';
 
 const SpinnerBox = () => {
   return (
-    <button className="btn btn-primary" type="button" disabled>
+    <button className="btn btn-secondary" type="button" disabled>
     <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-    Loading...
+    &nbsp;&nbsp; Loading...
   </button>
   )
 }
