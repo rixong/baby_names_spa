@@ -13,9 +13,24 @@ body {
   height:100%;
 }
 
-/* .container {
-  background-color: rgba(228, 154, 129, 0.995);
-} */
+/* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
+@media screen and (min-width: 820px) {
+
+  div.app-title {
+    font-size: 100px;
+    font-weight: lighter;
+  }
+}
+
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 819px) {
+
+  div.app-title {
+    font-size: 70px;
+    font-weight: lighter;
+  }
+}
 
 .name-list {
   display:flex;

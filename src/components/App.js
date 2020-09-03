@@ -50,7 +50,7 @@ const App = () => {
 
   return (
     <div className='container p-5 rounded'>
-      <div className='display-1 text-light '>Baby Names</div>
+      <div className='text-light app-title'>Baby Names</div>
       <div className='row d-inline'>
         <h4 className='text-light font-weight-light'>Your unique URL :</h4>
         {curList ?
