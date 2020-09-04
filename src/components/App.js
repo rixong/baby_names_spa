@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import {connect} from 'react-redux';
+import {CopyIcon, CheckCircleIcon} from '@primer/octicons-react';
+
 import '../custom.css';
 import Alert from './Alert';
 import NameList from './NameList';
 import Spinner from './SpinnerBox';
 
 import {config} from '../const';
-import {CopyIcon, CheckCircleIcon} from '@primer/octicons-react';
 
-const App = () => {
+import {saySomething} from '../actions' 
+
+const App = (props) => {
 
   const URL = config.url.API_URL 
   const clientURL = config.url.CLIENT_URL
@@ -17,7 +21,7 @@ const App = () => {
   const [copied, setCopied] = useState(false)
 
   useEffect(() => {
-
+    props.saySomething('Hey bob')
     const getList = async () => {
       setError('');
       const path = window.location.search
@@ -33,7 +37,7 @@ const App = () => {
     }
 
     getList();
-  }, [URL])
+  }, [URL, props])
 
 
   function copyUrl() {
@@ -76,4 +80,18 @@ const App = () => {
   )
 
 }
-export default App;
+// function saySomething(saying) {
+//   return {
+//     type: 'SAY_SOMETHING',
+//     saying
+//   }
+// }
+
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     saySomething: () => {
+//       dispatch(saySomething());
+//     }
+//   }
+// }
+export default connect(null, {saySomething})(App);

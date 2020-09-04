@@ -1,8 +1,8 @@
 /// ACTIONS
 
-function saySomething(saying) {
+export const saySomething = (saying) => {
   return {
-    type:saying,
-    saying: saying
+    type: 'SAY_SOMETHING',
+    saying
   }
 }

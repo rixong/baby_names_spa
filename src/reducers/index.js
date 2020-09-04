@@ -1,10 +1,12 @@
 ///  REDUCERS
 export default function babyNameReducers(
-  state = { saying: 'default saying' },
+  state = {},
   action) {
-  switch (action.TYPE) {
-    case 'SAY_SOMETHING':
-      return { ...state, phrase: action.saying }
+    switch (action.type) {
+      case 'SAY_SOMETHING':
+        console.log('action jack',action.type)
+        // return Object.assign({}, state, {votes: 0});
+        return {...state, saying:action.saying}
     default:
       return state
   }
