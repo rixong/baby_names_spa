@@ -52,7 +52,8 @@ body {
   text-decoration:line-through;
 }
 
-.alert-box {
-  padding:0;
-  height:0px;
+.alert {
+  /* padding:0;
+  height:0px; */
+  /* max-width: 200px; */
 }

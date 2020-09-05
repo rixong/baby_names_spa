@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import {connect} from 'react-redux';
+
 import Name from './Name';
 import Form from './Form';
 import { config } from '../const'
 
-const NameList = ({ listId, setError }) => {
+import{getNames} from '../actions'
 
-  const URL = config.url.API_URL
+const NameList = ({ curList, names }) => {
 
-  const [names, setNames] = useState([])
+  // const [names, setNames] = useState([])
   const [sortedNames, setSortedNames] = useState([])
 
   const sorts = {
@@ -19,73 +21,76 @@ const NameList = ({ listId, setError }) => {
     longest: (a, b) => b.name.length - a.name.length
   }
 
-  useEffect(() => {
-    getNames();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [listId])
 
-  const getNames = async () => {
-    const response = await fetch(`${URL}/names/?list_id=${listId}`)
-    const result = await response.json();
-    // console.log('Names',result.names)
-    setNames(result.names)
-    setSortedNames(result.names);
-  }
+  
+  useEffect(() => {
+    getNames(curList.id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    
+  }, [curList])
+
+  // const getNames = async () => {
+  //   const response = await fetch(`${URL}/names/?list_id=${listId}`)
+  //   const result = await response.json();
+  //   // console.log('Names',result.names)
+  //   setNames(result.names)
+    // setSortedNames(names);
+  // }
 
   const sortNames = (sortType) => {
     const sorted = names.slice().sort(sorts[sortType])
     setSortedNames(sorted)
   }
 
-  const handleStatusClick = async (nameId) => {
-    const result = await fetch(`${URL}`, {
-      method: 'PATCH',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body:
-        JSON.stringify({
-          id: listId,
-          name_id: nameId
-        })
-    })
-    let response = await result.json();
-    if (!response.error) {
-      let tempNames = [...names]
-      let curName = tempNames.find(name => name.id === nameId);
-      curName.active = !curName.active
-      setNames(tempNames);
-    }
-  }
+  // const handleStatusClick = async (nameId) => {
+  //   const result = await fetch(`${URL}`, {
+  //     method: 'PATCH',
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body:
+  //       JSON.stringify({
+  //         id: listId,
+  //         name_id: nameId
+  //       })
+  //   })
+  //   let response = await result.json();
+  //   if (!response.error) {
+  //     let tempNames = [...names]
+  //     let curName = tempNames.find(name => name.id === nameId);
+  //     curName.active = !curName.active
+  //     setNames(tempNames);
+  //   }
+  // }
 
-  const handleDeleteClick = async (e, nameId) => {
-    e.stopPropagation()
-    // console.log('Clicked: ', listId, nameId, e.target)
-    const response = await fetch(`${URL}/names`, {
-      method: "DELETE",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(
-        {
-          id: listId,
-          name_id: nameId
-        }
-      )
-    })
-    const result = await response.json();
-    console.log(result) 
-      getNames();
+  // const handleDeleteClick = async (e, nameId) => {
+  //   e.stopPropagation()
+  //   // console.log('Clicked: ', listId, nameId, e.target)
+  //   const response = await fetch(`${URL}/names`, {
+  //     method: "DELETE",
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify(
+  //       {
+  //         id: listId,
+  //         name_id: nameId
+  //       }
+  //     )
+  //   })
+  //   const result = await response.json();
+  //   console.log(result) 
+  //     getNames();
 
-  }
+  // }
 
   const renderNames = () => {
     return sortedNames.map(name => {
       return (<Name
-        handleStatusClick={handleStatusClick}
-        handleDeleteClick={handleDeleteClick}
+        // handleStatusClick={handleStatusClick}
+        // handleDeleteClick={handleDeleteClick}
         key={`${name.list_id}-${name.id}`}
         name={name} />)
     })
@@ -93,16 +98,23 @@ const NameList = ({ listId, setError }) => {
 
   return (
     <div>
-      <Form
+      {/* <Form
         listId={listId}
         getNames={getNames}
-        setError={setError}
         sortNames={sortNames}
-      />
+      /> */}
       <div className='name-list'>
-        {renderNames()}
+        {/* {renderNames()} */}
       </div>
     </div>
   )
 }
-export default NameList;
+
+
+const mapStateToProps = state => {
+  return {
+    curList: state.curList,
+    names: state.names
+  }
+};
+export default connect(mapStateToProps, { getNames })(NameList);
