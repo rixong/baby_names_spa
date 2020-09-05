@@ -3,10 +3,10 @@ import axios from 'axios'
 import { config } from '../const'
 
 
-export const SetErrorMessage = (error) => {
+export const setErrorMessage = (errorMessage) => {
   return {
     type: 'SET_ERROR_MESSAGE',
-    payload: error
+    payload: errorMessage
   }
 }
 
@@ -18,38 +18,54 @@ export const getCurList = (path) => async dispatch => {
       window.history.pushState("object or string", "Title", `/?list_id=${response.list.uid}`);
       dispatch({ type: 'GET_CURLIST', payload: response.list })
     } else {
-      dispatch(SetErrorMessage(response.error));
+      dispatch(setErrorMessage(response.error));
     }
   }
   catch (error) {
-    dispatch(SetErrorMessage('Server is down. Try back later.'));
+    dispatch(setErrorMessage('Server is down. Try back later.'));
   }
 }
-
 
 export const getNames = (listId) => {
-  console.log('here', `${config.url.API_URL}/names?list_id=${listId}`)
-  return async dispatch => {
-    try{
-    const response = await axios.get(`${config.url.API_URL}/names?list_id=${listId}`)
-    console.log("Names:", response)
-    dispatch({ type: 'GET_NAMES', payload: listId })
-    }
-    catch(error) {
-      
-    }
+  // console.log('go', `${config.url.API_URL}/names?list_id=${listId}`)
+  return async (dispatch) => {
+    const response = (await axios.get(`${config.url.API_URL}/names?list_id=${listId}`)).data;
+    dispatch({ type: 'GET_NAMES', payload: response.names });
+  };
+};
+
+export const addName = (listId, name) => {
+  console.log('Go')
+  return async (dispatch) => {
+    const response = await axios.post(config.url.API_URL, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body:
+        JSON.stringify({
+          id: listId,
+          name: name
+        })
+    })
+    console.log(response.data)
+    dispatch({type: "ADD_NAME", payload: response.name})
   }
 }
 
 
-
-
-
-export const addName = () => {
-  return {
-
-  }
-}
+//   const response = await fetch(`${URL}`, {
+//     method: 'POST',
+//     headers: {
+//       'Accept': 'application/json',
+//       'Content-Type': 'application/json'
+//     },
+//     body:
+//       JSON.stringify({
+//         id: listId,
+//         name: name
+//       })
+//   })
 
 export const changeStatus = () => {
   return {

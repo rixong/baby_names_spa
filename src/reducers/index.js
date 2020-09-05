@@ -8,6 +8,8 @@ export default function babyNameReducers(
       return { ...state, curList: action.payload }
     case 'GET_NAMES':
       return { ...state, names: action.payload }
+      case 'ADD_NAME':
+        return {...state, names: state.names.concat(action.payload)}
     case 'SET_ERROR_MESSAGE':
       return { ...state, error: true, message: action.payload }
     default:

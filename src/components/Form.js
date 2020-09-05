@@ -1,46 +1,49 @@
 import React, { useState } from 'react';
-import {config} from '../const'
+import {connect} from 'react-redux';
+import {addName, setErrorMessage} from '../actions';
+
+// import {config} from '../const'
 
 
-const Form = ({ listId, getNames, sortNames, setError }) => {
+const Form = ({ curList, getNames, sortNames, setError }) => {
   
-  const URL = config.url.API_URL
+  // const URL = config.url.API_URL
 
 
   const [queryTerm, setQueryTerm] = useState('')
   
-  const addName = async (name) => {
-    const response = await fetch(`${URL}`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body:
-        JSON.stringify({
-          id: listId,
-          name: name
-        })
-    })
-    const result = await response.json()
-    if (result.error) {
-      setError(result.error)
-    }
-    else {
-      getNames();
-    }
-  }
+  // const addName = async (name) => {
+  //   const response = await fetch(`${URL}`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body:
+  //       JSON.stringify({
+  //         id: listId,
+  //         name: name
+  //       })
+  //   })
+  //   const result = await response.json()
+  //   if (result.error) {
+  //     setError(result.error)
+  //   }
+  //   else {
+  //     getNames();
+  //   }
+  // }
 
   const onSubmitName = (e) => {
     e.preventDefault();
     let name = queryTerm.trim();
     if (name.match(/[^A-z, a-z]/)) {
-      setError('Name should only include letters.')
+      setErrorMessage('Name should only include letters.')
       return
     }
     name = queryTerm.split(' ');
     if (name.length > 2) {
-      setError('Name should only include maximum one space.')
+      setErrorMessage('Name should only include maximum one space.')
       return
     }
     //Fix capitalization
@@ -48,9 +51,12 @@ const Form = ({ listId, getNames, sortNames, setError }) => {
       return (subname.slice(0, 1).toUpperCase() + subname.slice(1).toLowerCase())
     }).join(' ');
     // console.log('Name', name)
-    addName(name);
+    addName(curList.id, name);
     setQueryTerm('');
   }
+
+
+
 
   const onSelectSort = (e) => {
     sortNames(e.target.value)
@@ -58,7 +64,7 @@ const Form = ({ listId, getNames, sortNames, setError }) => {
 
   const onHandleFocus = () => {
     // console.log('focus!')
-    setError('')
+    setErrorMessage('')
     // document.querySelector('.name-input').value = ''
   }
 
@@ -109,4 +115,10 @@ const Form = ({ listId, getNames, sortNames, setError }) => {
     </div>
   )
 }
-export default Form;
+
+const mapStateToProps = state => {
+  return {
+    curList: state.curList
+  }
+};
+export default connect(mapStateToProps, {addName, setErrorMessage})(Form);

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {connect} from 'react-redux';
+import axios from 'axios';
 
 import Name from './Name';
 import Form from './Form';
@@ -7,7 +8,7 @@ import { config } from '../const'
 
 import{getNames} from '../actions'
 
-const NameList = ({ curList, names }) => {
+const NameList = ({ curList, getNames, names }) => {
 
   // const [names, setNames] = useState([])
   const [sortedNames, setSortedNames] = useState([])
@@ -20,8 +21,6 @@ const NameList = ({ curList, names }) => {
     shortest: (a, b) => a.name.length - b.name.length,
     longest: (a, b) => b.name.length - a.name.length
   }
-
-
   
   useEffect(() => {
     getNames(curList.id);
@@ -30,11 +29,11 @@ const NameList = ({ curList, names }) => {
   }, [curList])
 
   // const getNames = async () => {
-  //   const response = await fetch(`${URL}/names/?list_id=${listId}`)
-  //   const result = await response.json();
-  //   // console.log('Names',result.names)
-  //   setNames(result.names)
-    // setSortedNames(names);
+  //   console.log(`${config.url.API_URL}/names/?list_id=${curList.id}`)
+  //   const response = (await axios.get(`${config.url.API_URL}/names?list_id=${curList.id}`)).data
+  //   console.log('Names',response)
+  //   setNames(response.names)
+  //   setSortedNames(names);
   // }
 
   const sortNames = (sortType) => {
@@ -87,7 +86,7 @@ const NameList = ({ curList, names }) => {
   // }
 
   const renderNames = () => {
-    return sortedNames.map(name => {
+    return names.map(name => {
       return (<Name
         // handleStatusClick={handleStatusClick}
         // handleDeleteClick={handleDeleteClick}
@@ -98,13 +97,13 @@ const NameList = ({ curList, names }) => {
 
   return (
     <div>
-      {/* <Form
-        listId={listId}
-        getNames={getNames}
-        sortNames={sortNames}
-      /> */}
+      <Form
+        // listId={listId}
+        // getNames={getNames}
+        // sortNames={sortNames}
+      />
       <div className='name-list'>
-        {/* {renderNames()} */}
+        {renderNames()}
       </div>
     </div>
   )
@@ -117,4 +116,4 @@ const mapStateToProps = state => {
     names: state.names
   }
 };
-export default connect(mapStateToProps, { getNames })(NameList);
+export default connect(mapStateToProps, {getNames})(NameList);
