@@ -1,12 +1,13 @@
 ///  REDUCERS
 export default function babyNameReducers(
-  state = {},
+  state = {error: false, message: ''},
   action) {
+    console.log('action jackson',action.type)
     switch (action.type) {
-      case 'SAY_SOMETHING':
-        console.log('action jack',action.type)
-        // return Object.assign({}, state, {votes: 0});
-        return {...state, saying:action.saying}
+      case 'GET_CURLIST':
+        return {...state, curList: action.payload}
+        case 'SET_ERROR_MESSAGE':
+          return {...state, error: true, message: action.payload}
     default:
       return state
   }

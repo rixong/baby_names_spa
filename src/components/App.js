@@ -9,35 +9,34 @@ import Spinner from './SpinnerBox';
 
 import {config} from '../const';
 
-import {saySomething} from '../actions' 
+import {getCurList} from '../actions' 
 
-const App = (props) => {
+const App = ({getCurList, curList}) => {
 
   const URL = config.url.API_URL 
   const clientURL = config.url.CLIENT_URL
 
-  const [curList, setCurList] = useState(undefined)
+  // const [curList, setCurList] = useState(undefined)
   const [error, setError] = useState('')
   const [copied, setCopied] = useState(false)
 
   useEffect(() => {
-    props.saySomething('Hey bob')
-    const getList = async () => {
-      setError('');
+    //   // setError('');
       const path = window.location.search
-      const response = await fetch(`${URL}${path}`)
-      let result = await response.json()
-      if (result.error) {
-        setError(result.error)
-      }
-      else {
-        setCurList(result.list)
-        window.history.pushState("object or string", "Title", `/?list_id=${result.list.uid}`);
-      }
-    }
+    //   let result = await response.json()
+    //   if (result.error) {
+    //     setError(result.error)
+    //   }
+    //   else {
+    //     setCurList(result.list)
+    //     
+    //   }
+    // }
 
-    getList();
-  }, [URL, props])
+    getCurList(path)
+    // console.log('here',curList)
+    // window.history.pushState("object or string", "Title", `/?list_id=${curList.uid}`);
+  }, [URL,getCurList])
 
 
   function copyUrl() {
@@ -80,18 +79,12 @@ const App = (props) => {
   )
 
 }
-// function saySomething(saying) {
-//   return {
-//     type: 'SAY_SOMETHING',
-//     saying
-//   }
-// }
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     saySomething: () => {
-//       dispatch(saySomething());
-//     }
-//   }
-// }
-export default connect(null, {saySomething})(App);
+const mapStateToProps = state => {
+  return {
+    curList: state.curList
+  }
+};
+
+
+export default connect(mapStateToProps, {getCurList})(App);
