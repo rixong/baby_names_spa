@@ -34,38 +34,16 @@ export const getNames = (listId) => {
   };
 };
 
-export const addName = (listId, name) => {
-  console.log('Go')
+export const addName = (listId, newName) => {
   return async (dispatch) => {
-    const response = await axios.post(config.url.API_URL, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body:
-        JSON.stringify({
-          id: listId,
-          name: name
-        })
-    })
-    console.log(response.data)
-    dispatch({type: "ADD_NAME", payload: response.name})
+    const response = (await axios.post(config.url.API_URL, {
+      id: listId,
+      name: newName
+    })).data
+    console.log(response)
+    dispatch({ type: "ADD_NAME", payload: response.name })
   }
 }
-
-
-//   const response = await fetch(`${URL}`, {
-//     method: 'POST',
-//     headers: {
-//       'Accept': 'application/json',
-//       'Content-Type': 'application/json'
-//     },
-//     body:
-//       JSON.stringify({
-//         id: listId,
-//         name: name
-//       })
-//   })
 
 export const changeStatus = () => {
   return {
@@ -73,8 +51,12 @@ export const changeStatus = () => {
   }
 }
 
-export const deleteName = () => {
-  return {
+export const deleteName = (listId, nameId) => {
+  console.log(listId, nameId)
+  return async (dispatch) => {
+    const response = await axios.delete(`${config.url.API_URL}/names`, {id: listId, name_id: nameId})
+    console.log(response.data)
 
+    dispatch ({type: "DELETE_NAME", payload: response.name})
   }
 }

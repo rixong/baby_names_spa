@@ -1,6 +1,9 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
-const Name = ({ name, handleStatusClick, handleDeleteClick }) => {
+import {deleteName} from '../actions';
+
+const Name = ({ name, handleStatusClick, deleteName, curList }) => {
 
   const divClassDefault = 'list-group-item py-0 pr-1 mb-4 rounded'
   const divClassFinal = name.active ?
@@ -12,12 +15,12 @@ const Name = ({ name, handleStatusClick, handleDeleteClick }) => {
     <div
       data-id={name.id}
       className={divClassFinal}
-      onClick={() => handleStatusClick(name.id)}
+      // onClick={() => handleStatusClick(name.id)}
     >
       {name.name}
       <button 
         type="button"
-        onClick={(e) => handleDeleteClick(e, name.id)}
+        onClick={(e) => deleteName(curList.id, name.id)}
         className="close ml-3" 
         aria-label="Close">
         <span aria-hidden="true" className='h4' >&times;</span>
@@ -25,4 +28,10 @@ const Name = ({ name, handleStatusClick, handleDeleteClick }) => {
     </div>
   )
 }
-export default Name;
+
+const mapStateToProps = state => {
+  return {
+    curList: state.curList
+  }
+};
+export default connect (mapStateToProps, {deleteName})(Name);

@@ -5,7 +5,7 @@ import {addName, setErrorMessage} from '../actions';
 // import {config} from '../const'
 
 
-const Form = ({ curList, getNames, sortNames, setError }) => {
+const Form = ({ curList, getNames, sortNames, setError, addName }) => {
   
   // const URL = config.url.API_URL
 
@@ -54,8 +54,6 @@ const Form = ({ curList, getNames, sortNames, setError }) => {
     addName(curList.id, name);
     setQueryTerm('');
   }
-
-
 
 
   const onSelectSort = (e) => {
