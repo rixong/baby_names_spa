@@ -10,6 +10,19 @@ export const setErrorMessage = (errorMessage) => {
   }
 }
 
+export const clearErrorMessage = () => {
+  return {
+    type: 'CLEAR_ERROR_MESSAGE'
+  }
+}
+
+export const setSortOrder = (order) => {
+  return {
+    type: 'SET_SORT_ORDER',
+    payload: order
+  }
+}
+
 export const getCurList = (path) => async dispatch => {
   try {
     const response = (await axios.get(`${config.url.API_URL}${path}`)).data
@@ -61,3 +74,4 @@ export const deleteName = (nameId) => {
     dispatch({ type: "DELETE_NAME", payload: response.name })
   }
 }
+

@@ -1,6 +1,6 @@
 ///  REDUCERS
 export default function babyNameReducers(
-  state = { names: [], curList: null, error: false, message: '' },
+  state = { names: [], curList: null, error: false, message: '', sortOrder: 'alpha' },
   action) {
   console.log('action', action.payload)
   let tempNames;
@@ -20,6 +20,10 @@ export default function babyNameReducers(
       return { ...state, names: tempNames }
     case 'SET_ERROR_MESSAGE':
       return { ...state, error: true, message: action.payload }
+    case 'CLEAR_ERROR_MESSAGE':
+      return { ...state, error: false, message: '' }
+    case 'SET_SORT_ORDER':
+      return {...state, sortOrder: action.payload}
     default:
       return state
   }

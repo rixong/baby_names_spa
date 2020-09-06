@@ -5,7 +5,7 @@ const Alert = ({ error, message }) => {
 
   return (
     <div className="row">
-      <div className="col-4 offset-4 align-items-center">
+      <div className="col-6 offset-3 align-items-center">
       {error ?
         <div className="alert alert-secondary text-dark" role="alert"> {message}</div>
         : null}

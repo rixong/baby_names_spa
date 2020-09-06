@@ -1,38 +1,17 @@
 import React, { useState } from 'react';
-import {connect} from 'react-redux';
-import {addName, setErrorMessage} from '../actions';
+import { connect } from 'react-redux';
+import {
+  addName,
+  setSortOrder,
+  setErrorMessage,
+  clearErrorMessage
+}
+  from '../actions';
 
-// import {config} from '../const'
 
-
-const Form = ({ curList, getNames, sortNames, setError, addName }) => {
-  
-  // const URL = config.url.API_URL
-
+const Form = ({ curList, addName, setErrorMessage, clearErrorMessage, setSortOrder }) => {
 
   const [queryTerm, setQueryTerm] = useState('')
-  
-  // const addName = async (name) => {
-  //   const response = await fetch(`${URL}`, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Accept': 'application/json',
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body:
-  //       JSON.stringify({
-  //         id: listId,
-  //         name: name
-  //       })
-  //   })
-  //   const result = await response.json()
-  //   if (result.error) {
-  //     setError(result.error)
-  //   }
-  //   else {
-  //     getNames();
-  //   }
-  // }
 
   const onSubmitName = (e) => {
     e.preventDefault();
@@ -56,13 +35,13 @@ const Form = ({ curList, getNames, sortNames, setError, addName }) => {
   }
 
 
-  const onSelectSort = (e) => {
-    sortNames(e.target.value)
-  }
+  // const onSelectSort = (e) => {
+  //   setSortOrder(e.target.value)
+  // }
 
   const onHandleFocus = () => {
     // console.log('focus!')
-    setErrorMessage('')
+    clearErrorMessage()
     // document.querySelector('.name-input').value = ''
   }
 
@@ -94,17 +73,16 @@ const Form = ({ curList, getNames, sortNames, setError, addName }) => {
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
-              // onClick={onSelectSort}
               ><span className="sr-only">Sort order</span></button>
               <div className="dropdown-menu">
-                <button className="dropdown-item" type="button" value='alpha' onClick={onSelectSort}>A-Z</button>
-                <button className="dropdown-item" type="button" value='revAlpha' onClick={onSelectSort}>Z-A</button>
+                <button className="dropdown-item" type="button" value='alpha' onClick={(e) => setSortOrder(e.target.value)}>A-Z</button>
+                <button className="dropdown-item" type="button" value='revAlpha' onClick={(e) => setSortOrder(e.target.value)}>Z-A</button>
                 <div role="separator" className="dropdown-divider"></div>
-                <button className="dropdown-item" type="button" value='createdAt' onClick={onSelectSort}>Newest</button>
-                <button className="dropdown-item" type="button" value='revCreatedAt' onClick={onSelectSort}>Oldest</button>
+                <button className="dropdown-item" type="button" value='createdAt' onClick={(e) => setSortOrder(e.target.value)}>Newest</button>
+                <button className="dropdown-item" type="button" value='revCreatedAt' onClick={(e) => setSortOrder(e.target.value)}>Oldest</button>
                 <div role="separator" className="dropdown-divider"></div>
-                <button className="dropdown-item" type="button" value='shortest' onClick={onSelectSort}>Shortest</button>
-                <button className="dropdown-item" type="button" value='longest' onClick={onSelectSort}>Longest</button>
+                <button className="dropdown-item" type="button" value='shortest' onClick={(e) => setSortOrder(e.target.value)}>Shortest</button>
+                <button className="dropdown-item" type="button" value='longest' onClick={(e) => setSortOrder(e.target.value)}>Longest</button>
               </div>
             </div>
           </div>
@@ -119,4 +97,10 @@ const mapStateToProps = state => {
     curList: state.curList
   }
 };
-export default connect(mapStateToProps, {addName, setErrorMessage})(Form);
+
+export default connect(mapStateToProps, {
+  addName,
+  setErrorMessage,
+  setSortOrder,
+  clearErrorMessage
+})(Form);
