@@ -7,12 +7,12 @@ import thunk from 'redux-thunk'
 import babyNameReducers from './reducers'
 import App from './components/App'
 
-const logger = store => next => action => {
-  console.log('dispatching', action)
-  let result = next(action)
-  console.log('next state', store.getState())
-  return result
-};
+// const logger = store => next => action => {
+//   console.log('dispatching', action)
+//   let result = next(action)
+//   console.log('next state', store.getState())
+//   return result
+// };
 
 const middlewares = [thunk];
 
