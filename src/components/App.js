@@ -5,6 +5,7 @@ import { CopyIcon, CheckCircleIcon } from '@primer/octicons-react';
 import '../custom.css';
 import Alert from './Alert';
 import NameList from './NameList';
+import Footer from './Footer'
 
 import { config } from '../const';
 
@@ -59,7 +60,7 @@ const App = ({ getCurList, curList, loading }) => {
 
       <h1 className='text-primary'>&mdash;&mdash;&mdash;&mdash;</h1>
       {curList ? <NameList /> : null}
-
+      <Footer />
     </div>
   )
 }
