@@ -41,55 +41,9 @@ const NameList = ({ curList, getNames, names }) => {
     setSortedNames(sorted)
   }
 
-  // const handleStatusClick = async (nameId) => {
-  //   const result = await fetch(`${URL}`, {
-  //     method: 'PATCH',
-  //     headers: {
-  //       'Accept': 'application/json',
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body:
-  //       JSON.stringify({
-  //         id: listId,
-  //         name_id: nameId
-  //       })
-  //   })
-  //   let response = await result.json();
-  //   if (!response.error) {
-  //     let tempNames = [...names]
-  //     let curName = tempNames.find(name => name.id === nameId);
-  //     curName.active = !curName.active
-  //     setNames(tempNames);
-  //   }
-  // }
-
-  // const handleDeleteClick = async (e, nameId) => {
-  //   e.stopPropagation()
-  //   // console.log('Clicked: ', listId, nameId, e.target)
-  //   const response = await fetch(`${URL}/names`, {
-  //     method: "DELETE",
-  //     headers: {
-  //       'Accept': 'application/json',
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(
-  //       {
-  //         id: listId,
-  //         name_id: nameId
-  //       }
-  //     )
-  //   })
-  //   const result = await response.json();
-  //   console.log(result) 
-  //     getNames();
-
-  // }
-
   const renderNames = () => {
     return names.map(name => {
       return (<Name
-        // handleStatusClick={handleStatusClick}
-        // handleDeleteClick={handleDeleteClick}
         key={`${name.list_id}-${name.id}`}
         name={name} />)
     })

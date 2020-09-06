@@ -1,9 +1,9 @@
 ///  REDUCERS
 export default function babyNameReducers(
   state = { names: [], curList: null, error: false, message: '' },
-  action) 
-  {
+  action) {
   console.log('action', action.payload)
+  let tempNames;
   switch (action.type) {
     case 'GET_CURLIST':
       return { ...state, curList: action.payload }
@@ -11,8 +11,12 @@ export default function babyNameReducers(
       return { ...state, names: action.payload }
     case 'ADD_NAME':
       return { ...state, names: state.names.concat(action.payload) }
+    case 'CHANGE_NAME_STATUS':
+      tempNames = state.names.filter(name => name.id !== action.payload.id);
+      tempNames.push(action.payload)
+      return { ...state, names: tempNames }
     case 'DELETE_NAME':
-      const tempNames = state.names.filter(name => name.id !== action.payload.id);
+      tempNames = state.names.filter(name => name.id !== action.payload.id);
       return { ...state, names: tempNames }
     case 'SET_ERROR_MESSAGE':
       return { ...state, error: true, message: action.payload }

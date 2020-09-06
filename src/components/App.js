@@ -16,26 +16,11 @@ const App = ({ getCurList, curList, error }) => {
   const URL = config.url.API_URL
   const clientURL = config.url.CLIENT_URL
 
-  // const [curList, setCurList] = useState(undefined)
-  // const [error, setError] = useState('')
   const [copied, setCopied] = useState(false)
 
   useEffect(() => {
-    //   // setError('');
     const path = window.location.search
-    //   let result = await response.json()
-    //   if (result.error) {
-    //     setError(result.error)
-    //   }
-    //   else {
-    //     setCurList(result.list)
-    //     
-    //   }
-    // }
-
     getCurList(path)
-    // console.log('here',curList)
-    // window.history.pushState("object or string", "Title", `/?list_id=${curList.uid}`);
   }, [URL, getCurList])
 
 
@@ -74,7 +59,6 @@ const App = ({ getCurList, curList, error }) => {
 
       <h1 className='text-primary'>&mdash;&mdash;&mdash;&mdash;</h1>
 
-      {/* <NameList/> */}
       {curList ?
         <NameList/>
         : <Spinner />}

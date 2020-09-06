@@ -45,43 +45,19 @@ export const addName = (listId, newName) => {
   }
 }
 
-export const changeStatus = () => {
-  return {
-
-  }
-}
-
-
-
-export const deleteName = (listId, nameId) => {
-  console.log(listId, nameId)
+export const changeNameStatus = (nameId) => {
+  console.log('status')
   return async dispatch => {
-    const result = await fetch(`${config.url.API_URL}/names`, {
-          method: "DELETE",
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(
-            {
-              id: listId,
-              name_id: nameId
-            }
-          )
-        })
-        const response = await result.json();
+    const response = (await axios.patch(`${config.url.API_URL}/names/${nameId}`)).data
     console.log(response.name)
-
-    dispatch ({type: "DELETE_NAME", payload: response.name})
+    dispatch({type:'CHANGE_NAME_STATUS', payload: response.name})
   }
 }
 
-// export const deleteName = (listId, nameId) => {
-//   console.log(listId, nameId)
-//   return async dispatch => {
-//     const response = await axios.delete(`${config.url.API_URL}/names`, {id: listId, name_id: nameId})
-//     console.log(response.data)
-
-//     dispatch ({type: "DELETE_NAME", payload: response.name})
-//   }
-// }
+export const deleteName = (nameId) => {
+  return async dispatch => {
+    const response = (await axios.delete(`${config.url.API_URL}/names/${nameId}`)).data
+    // console.log(response)
+    dispatch({ type: "DELETE_NAME", payload: response.name })
+  }
+}
