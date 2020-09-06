@@ -58,7 +58,7 @@ const App = ({ getCurList, curList, error }) => {
       <Alert />
 
       <h1 className='text-primary'>&mdash;&mdash;&mdash;&mdash;</h1>
-
+      
       {curList ?
         <NameList/>
         : <Spinner />}

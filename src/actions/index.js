@@ -47,14 +47,22 @@ export const getNames = (listId) => {
   };
 };
 
-export const addName = (listId, newName) => {
-  return async (dispatch) => {
+export const addName = (listId, newName) => async (dispatch) => {
+  try {
     const response = (await axios.post(config.url.API_URL, {
       id: listId,
       name: newName
     })).data
-    console.log(response)
-    dispatch({ type: "ADD_NAME", payload: response.name })
+    if (response.status === 'ok') {
+      console.log(response)
+      dispatch({ type: "ADD_NAME", payload: response.name })
+    }
+    if (response.status === 'error') {
+      dispatch(setErrorMessage(response.error))
+    }
+  }
+  catch (error) {
+    dispatch(setErrorMessage('Server is down. Try back later.'))
   }
 }
 
@@ -63,7 +71,7 @@ export const changeNameStatus = (nameId) => {
   return async dispatch => {
     const response = (await axios.patch(`${config.url.API_URL}/names/${nameId}`)).data
     console.log(response.name)
-    dispatch({type:'CHANGE_NAME_STATUS', payload: response.name})
+    dispatch({ type: 'CHANGE_NAME_STATUS', payload: response.name })
   }
 }
 
