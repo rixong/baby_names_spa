@@ -15,14 +15,18 @@ const Form = ({ curList, addName, setErrorMessage, clearErrorMessage, setSortOrd
 
   const onSubmitName = (e) => {
     e.preventDefault();
+
     let name = queryTerm.trim();
-    if (name.match(/[^A-z, a-z]/)) {
+
+    if (name.match(/[^A-z, a-z]/) || !name) {
       setErrorMessage('Name should only include letters.')
+      setQueryTerm('');
       return
     }
     name = queryTerm.split(' ');
     if (name.length > 2) {
       setErrorMessage('Name should only include maximum one space.')
+      setQueryTerm('');
       return
     }
     //Fix capitalization
