@@ -51,12 +51,37 @@ export const changeStatus = () => {
   }
 }
 
+
+
 export const deleteName = (listId, nameId) => {
   console.log(listId, nameId)
-  return async (dispatch) => {
-    const response = await axios.delete(`${config.url.API_URL}/names`, {id: listId, name_id: nameId})
-    console.log(response.data)
+  return async dispatch => {
+    const result = await fetch(`${config.url.API_URL}/names`, {
+          method: "DELETE",
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(
+            {
+              id: listId,
+              name_id: nameId
+            }
+          )
+        })
+        const response = await result.json();
+    console.log(response.name)
 
     dispatch ({type: "DELETE_NAME", payload: response.name})
   }
 }
+
+// export const deleteName = (listId, nameId) => {
+//   console.log(listId, nameId)
+//   return async dispatch => {
+//     const response = await axios.delete(`${config.url.API_URL}/names`, {id: listId, name_id: nameId})
+//     console.log(response.data)
+
+//     dispatch ({type: "DELETE_NAME", payload: response.name})
+//   }
+// }

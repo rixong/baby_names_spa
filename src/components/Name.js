@@ -20,7 +20,7 @@ const Name = ({ name, handleStatusClick, deleteName, curList }) => {
       {name.name}
       <button 
         type="button"
-        onClick={(e) => deleteName(curList.id, name.id)}
+        onClick={() => deleteName(curList.id, name.id)}
         className="close ml-3" 
         aria-label="Close">
         <span aria-hidden="true" className='h4' >&times;</span>
