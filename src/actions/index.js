@@ -67,7 +67,7 @@ export const addName = (listId, newName) => async (dispatch) => {
       name: newName
     })).data
     if (response.status === 'ok') {
-      console.log(response)
+      // console.log(response)
       dispatch({ type: "ADD_NAME", payload: response.name })
     }
     if (response.status === 'error') {

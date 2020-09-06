@@ -4,7 +4,7 @@ export default function babyNameReducers(
     names: [], curList: null, error: false, message: '', loading: true, sortOrder: 'alpha' 
   },
   action) {
-  console.log('action', action.payload)
+  // console.log('action', action.payload)
   let tempNames;
   switch (action.type) {
     case 'GET_CURLIST':

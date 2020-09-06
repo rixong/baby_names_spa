@@ -14,7 +14,7 @@ const logger = store => next => action => {
   return result
 };
 
-const middlewares = [thunk, logger];
+const middlewares = [thunk];
 
 const store = createStore(
   babyNameReducers,
