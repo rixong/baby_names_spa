@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Spinner from './SpinnerBox';
 
-const Alert = ({ error, message }) => {
+const Alert = ({ error, message, loading }) => {
 
   return (
     <div className="row">
@@ -9,6 +10,7 @@ const Alert = ({ error, message }) => {
         {error ?
           <div className="alert alert-secondary text-dark" role="alert"> {message}</div>
           : null}
+          {loading ? <Spinner /> : null}
       </div>
     </div>
   )
@@ -17,7 +19,8 @@ const Alert = ({ error, message }) => {
 const mapStateToProps = state => {
   return {
     error: state.error,
-    message: state.message
+    message: state.message,
+    loading: state.loading
   }
 };
 

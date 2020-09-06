@@ -5,13 +5,12 @@ import { CopyIcon, CheckCircleIcon } from '@primer/octicons-react';
 import '../custom.css';
 import Alert from './Alert';
 import NameList from './NameList';
-import Spinner from './SpinnerBox';
 
 import { config } from '../const';
 
 import { getCurList } from '../actions'
 
-const App = ({ getCurList, curList, error }) => {
+const App = ({ getCurList, curList, loading }) => {
 
   const URL = config.url.API_URL
   const clientURL = config.url.CLIENT_URL
@@ -21,6 +20,7 @@ const App = ({ getCurList, curList, error }) => {
   useEffect(() => {
     const path = window.location.search
     getCurList(path)
+
   }, [URL, getCurList])
 
 
@@ -58,22 +58,17 @@ const App = ({ getCurList, curList, error }) => {
       <Alert />
 
       <h1 className='text-primary'>&mdash;&mdash;&mdash;&mdash;</h1>
-      
-      {curList ?
-        <NameList/>
-        : <Spinner />}
+      {curList ? <NameList /> : null}
 
     </div>
   )
-
 }
 
 const mapStateToProps = state => {
   return {
     curList: state.curList,
-    error: state.error
+    loading: state.loading
   }
 };
-
 
 export default connect(mapStateToProps, { getCurList })(App);

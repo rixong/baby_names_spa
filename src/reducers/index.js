@@ -1,6 +1,8 @@
 ///  REDUCERS
 export default function babyNameReducers(
-  state = { names: [], curList: null, error: false, message: '', sortOrder: 'alpha' },
+  state = { 
+    names: [], curList: null, error: false, message: '', loading: true, sortOrder: 'alpha' 
+  },
   action) {
   console.log('action', action.payload)
   let tempNames;
@@ -19,11 +21,15 @@ export default function babyNameReducers(
       tempNames = state.names.filter(name => name.id !== action.payload.id);
       return { ...state, names: tempNames }
     case 'SET_ERROR_MESSAGE':
-      return { ...state, error: true, message: action.payload }
+      return { ...state, error: true, message: action.payload, loading: false }
     case 'CLEAR_ERROR_MESSAGE':
       return { ...state, error: false, message: '' }
+    case 'SHOW_LOADING':
+      return { ...state, loading: true }
+    case 'CLEAR_LOADING':
+      return { ...state, loading: false }
     case 'SET_SORT_ORDER':
-      return {...state, sortOrder: action.payload}
+      return { ...state, sortOrder: action.payload }
     default:
       return state
   }

@@ -16,6 +16,18 @@ export const clearErrorMessage = () => {
   }
 }
 
+export const showLoading = () => {
+  return {
+    type: 'SHOW_LOADING'
+  }
+}
+
+export const clearLoading = () => {
+  return {
+    type: 'CLEAR_LOADING'
+  }
+}
+
 export const setSortOrder = (order) => {
   return {
     type: 'SET_SORT_ORDER',
@@ -30,6 +42,7 @@ export const getCurList = (path) => async dispatch => {
     if (response.status === 'ok') {
       window.history.pushState("object or string", "Title", `/?list_id=${response.list.uid}`);
       dispatch({ type: 'GET_CURLIST', payload: response.list })
+      dispatch(clearLoading());
     } else {
       dispatch(setErrorMessage(response.error));
     }

@@ -34,11 +34,6 @@ const Form = ({ curList, addName, setErrorMessage, clearErrorMessage, setSortOrd
     setQueryTerm('');
   }
 
-
-  // const onSelectSort = (e) => {
-  //   setSortOrder(e.target.value)
-  // }
-
   const onHandleFocus = () => {
     // console.log('focus!')
     clearErrorMessage()
