@@ -40,12 +40,8 @@ body {
 .list-group-item{
   text-align: center;
   font-size: 28px;
-  /* background-color: rgb(182, 182, 67); */
   display: inline;
-  margin:5px;
-  padding:10 22px;
-  /* border: solid 1px; */
-  /* border-radius: 40%; */
+  cursor: pointer;
 }
 
 .strike {

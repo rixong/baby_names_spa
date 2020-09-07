@@ -80,10 +80,9 @@ export const addName = (listId, newName) => async (dispatch) => {
 }
 
 export const changeNameStatus = (nameId) => {
-  console.log('status')
   return async dispatch => {
     const response = (await axios.patch(`${config.url.API_URL}/names/${nameId}`)).data
-    console.log(response.name)
+    // console.log(response.name)
     dispatch({ type: 'CHANGE_NAME_STATUS', payload: response.name })
   }
 }

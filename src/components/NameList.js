@@ -24,9 +24,7 @@ const NameList = ({ curList, getNames, names, sortOrder }) => {
 
   return (
     <div>
-      <Form
-        // sortNames={sortNames}
-      />
+      <Form/>
       <div className='name-list'>
         {renderNames()}
       </div>

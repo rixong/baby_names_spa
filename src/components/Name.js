@@ -5,7 +5,7 @@ import { deleteName, changeNameStatus } from '../actions';
 
 const Name = ({ name, changeNameStatus, deleteName, curList }) => {
 
-  const divClassDefault = 'list-group-item py-0 pr-1 mb-4 rounded'
+  const divClassDefault = 'list-group-item py-0 pr-1 m-2 rounded'
   const divClassFinal = name.active ?
     `${divClassDefault} bg-primary text-dark`
     : `${divClassDefault} bg-info strike`
