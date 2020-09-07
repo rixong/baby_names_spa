@@ -14,7 +14,6 @@ import { getCurList } from '../actions'
 const App = ({ getCurList, curList, loading }) => {
 
   const URL = config.url.API_URL
-  const clientURL = config.url.CLIENT_URL
 
   const [copied, setCopied] = useState(false)
 

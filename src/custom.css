@@ -34,7 +34,6 @@ body {
 
 .list-box {
   min-height: 200px;
-
 }
 
 .name-list {
@@ -53,8 +52,3 @@ body {
   text-decoration:line-through;
 }
 
-.alert {
-  /* padding:0;
-  height:0px; */
-  /* max-width: 200px; */
-}
