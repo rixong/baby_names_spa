@@ -11,9 +11,10 @@ import { config } from '../const';
 
 import { getCurList } from '../actions'
 
-const App = ({ getCurList, curList, loading }) => {
+const App = ({ getCurList, curList }) => {
 
   const URL = config.url.API_URL
+  const clientURL = config.url.CLIENT_URL
 
   const [copied, setCopied] = useState(false)
 
@@ -37,23 +38,28 @@ const App = ({ getCurList, curList, loading }) => {
   }
 
   return (
-    <div className='container p-5 rounded'>
+    <div className='container rounded px-4'>
       <div className='text-light app-title'>Baby Names</div>
 
-      <div className='row d-inline'>
-        <h4 className='text-light font-weight-light'>Your unique URL :</h4>
-        {curList ?
-          <h5 className='mt-3 text-info' id='uniqueUrl'>
-            <button
-              className='btn btn-secondary text-dark ml-4'
-              id='copy-button'
-              onClick={copyUrl}
-            >
-              {copied ? <CheckCircleIcon size={24} /> : <CopyIcon size={24} />}
-            </button>
-          </h5>
-          : null}
+      <div className='row align-items-end no-gutters'>
+        <div className='col-7'>
+          <h4 className='text-light font-weight-light text-right'>Your unique URL :</h4>
+        </div>
+        <div className='col text-left ml-3'>
+          <button
+            className='btn btn-secondary text-dark'
+            id='copy-button'
+            onClick={copyUrl}
+          >
+            {copied ? <CheckCircleIcon size={24} /> : <CopyIcon size={24} />}
+          </button>
+        </div>
       </div>
+        <div className='text-center d-none d-sm-block'>
+          {curList ?
+            <h5 className='mt-3 text-info' id='uniqueUrl'>{clientURL}{`?list_id=${curList.uid}`}</h5>
+            : null}
+        </div>
 
       <Alert />
 
@@ -65,10 +71,7 @@ const App = ({ getCurList, curList, loading }) => {
 }
 
 const mapStateToProps = state => {
-  return {
-    curList: state.curList,
-    loading: state.loading
-  }
+  return { curList: state.curList }
 };
 
 export default connect(mapStateToProps, { getCurList })(App);
