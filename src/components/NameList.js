@@ -23,7 +23,7 @@ const NameList = ({ curList, getNames, names, sortOrder }) => {
   }
 
   return (
-    <div>
+    <div className="list-box">
       <Form/>
       <div className='name-list'>
         {renderNames()}

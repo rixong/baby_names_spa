@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <div className="row fixed-bottom">
+    <div className="row mt-5">
         <div className="col text-center">
           <p>Built with React/Redux, Boostrap 4.5 and Ruby on Rails</p>
         </div>

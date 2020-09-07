@@ -44,7 +44,7 @@ const App = ({ getCurList, curList, loading }) => {
       <div className='row d-inline'>
         <h4 className='text-light font-weight-light'>Your unique URL :</h4>
         {curList ?
-          <h5 className='mt-3 text-info' id='uniqueUrl'>{clientURL}{`?list_id=${curList.uid}`}
+          <h5 className='mt-3 text-info' id='uniqueUrl'>
             <button
               className='btn btn-secondary text-dark ml-4'
               id='copy-button'
